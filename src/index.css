@@ -55,6 +55,9 @@
   color: rgb(74, 74, 141);
   margin: 10px;
 }
+.icon{
+  margin: 10px;
+}
 
 /* CARDS */
 .card-text{
