@@ -1,9 +1,7 @@
-import Navbar from "../components/Navbar"
 
 const CardForm = () => {
   return (
     <div>
-        <Navbar></Navbar>
         <div className="Container">
         <div className="glass-effect">
         <h2>Card Form</h2>

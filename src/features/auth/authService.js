@@ -1,11 +1,11 @@
 import axios from 'axios'
 
 // const API_URL ='https://indigo-chameleon-wig.cyclic.app/api/users/'
-const API_URL ='http://localhost:500/api/users/'
+const API_URL ='http://localhost:5000/api/users/'
 
 //REGISTRAR USUARIO
 const signup = async(userData) =>{
-    const response = await axios.post(API_URL, userData)
+    const response = await axios.post(API_URL + 'signup', userData)
     return response.data
 }
 
