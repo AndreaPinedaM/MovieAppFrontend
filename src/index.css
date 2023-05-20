@@ -31,9 +31,22 @@
   justify-content: center;
   align-items: center;
 }
+
+/* BACKGROUNDS */
 .dinamic{
   background-image: url("./assets/background.gif");
 }
+.signup{
+  background-image: url("./assets/signup.gif");
+}
+.logBack{
+  background-image: url("./assets/login.gif");
+}
+.cardform{
+  background-image: url("./assets/cardform.gif");
+}
+
+/* LOGIN PAGE */
 .login{
   margin-top: -15px;
   border-radius: 0 0 12px 12px;
@@ -42,9 +55,14 @@
   padding: 10px 50px;
   text-align: center;
 }
-
 #email, #password{
   border-radius: 0;
+}
+#userIconContainer{
+  width: 20%;
+  height: 20%;
+  margin-bottom: -75px;
+  z-index: 1;
 }
 
 /* BOTONES */
@@ -83,7 +101,11 @@
   padding: 6.5px 10px;
   background-color: #04337D;
 }
-
+#userIcon{
+  width: 100%;
+  height: 100%;
+  color: #04337D
+}
 /* CARDS */
 .card-text{
   text-align: center;

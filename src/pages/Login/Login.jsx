@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom'
 import { login, reset } from '../../features/auth/authSlice'
 import { toast } from 'react-toastify'
 import Spinner from "../../components/Spinner"
-import { FaUser, FaLock } from 'react-icons/fa'
+import { FaUser, FaLock, FaUserCircle } from 'react-icons/fa'
 
 const Login = () => {
 
@@ -42,7 +42,7 @@ const Login = () => {
     event.preventDefault()
 
     if(!password || !email){
-      toast.error('LLena los campos requeridos')
+      toast.error('Llena los campos requeridos')
     }else{
       const userData = { email, password }
       dispatch(login(userData))
@@ -55,7 +55,10 @@ const Login = () => {
 
   return (
     <>
-      <div className="Container">
+      <div className="Container logBack">
+        <div id="userIconContainer">
+          <FaUserCircle id="userIcon"></FaUserCircle>
+        </div>
         <div className="glass-effect">
           <form onSubmit={onSubmit}>
             <div className="form-group">

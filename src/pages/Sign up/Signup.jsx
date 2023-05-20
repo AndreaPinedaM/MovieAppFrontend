@@ -56,7 +56,7 @@ const Signup = () => {
 
     return (
         <>
-        <div className="Container">
+        <div className="Container signup">
             <div className="glass-effect">
             <h2>Sign up</h2>
             <form onSubmit={onSubmit}>

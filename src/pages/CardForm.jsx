@@ -1,8 +1,8 @@
 
 const CardForm = () => {
-  return (
+return (
     <div>
-        <div className="Container">
+        <div className="Container cardform">
         <div className="glass-effect">
         <h2>Card Form</h2>
             <div className="form-group">
