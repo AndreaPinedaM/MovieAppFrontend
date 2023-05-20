@@ -46,7 +46,7 @@ return (
                             </>
                         ) : (
                             <>
-                                <span className="badge bg-dark">Dark</span>
+                                <span className="badge bg-dark">Inicia sesión</span>
                             </>
                         )}
                 </div>

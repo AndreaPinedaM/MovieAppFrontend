@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom'
 import { login, reset } from '../../features/auth/authSlice'
 import { toast } from 'react-toastify'
 import Spinner from "../../components/Spinner"
+import { FaUser, FaLock } from 'react-icons/fa'
 
 const Login = () => {
 
@@ -56,11 +57,14 @@ const Login = () => {
     <>
       <div className="Container">
         <div className="glass-effect">
-          <h2>Log in</h2>
           <form onSubmit={onSubmit}>
             <div className="form-group">
               <label className="form-label mt-4">Email address</label>
-              <input 
+              <div className="inputContainer">
+                <div className='loginIcon'>
+                <FaUser></FaUser>
+                </div>
+                <input 
                 type="email" 
                 className="form-control" 
                 id="email"
@@ -68,9 +72,14 @@ const Login = () => {
                 value={email} 
                 onChange={onChange}  
                 placeholder="Enter email" />
+              </div>
             </div>
             <div className="form-group">
             <label className="form-label mt-4">Password</label>
+            <div className="inputContainer">
+              <div className="loginIcon">
+                <FaLock></FaLock>
+              </div>
               <input 
                 type="password" 
                 className="form-control" 
@@ -80,6 +89,7 @@ const Login = () => {
                 onChange={onChange} 
                 placeholder="Password" />
             </div>
+            </div>
             <div className="form-group">
               <button 
                 type="submit" 
@@ -87,6 +97,9 @@ const Login = () => {
             </div>
           </form>
         </div>
+          <div className="glass-effect login">
+            <h6 className='tittle'>LOGIN</h6>
+          </div>
       </div>
     </>
   )
