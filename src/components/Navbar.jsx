@@ -1,6 +1,6 @@
 import { FaSignOutAlt} from 'react-icons/fa'
 import { useNavigate } from 'react-router-dom'
-import { useSelector, useDispatch } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import { logout, reset } from '../features/auth/authSlice'
 
 const Navbar = () => {
@@ -8,7 +8,7 @@ const Navbar = () => {
     const navigate = useNavigate()
     const dispatch = useDispatch()
 
-    const { user } = useSelector((state) => state.auth)
+    const user = JSON.parse(sessionStorage.getItem('user'))
 
     const onLogout = () => {
         dispatch(logout())
@@ -46,7 +46,7 @@ return (
                             </>
                         ) : (
                             <>
-                                <span className="badge bg-dark">Inicia sesión</span>
+                                <span className="badge bg-dark">Inicia sesión</span> 
                             </>
                         )}
                 </div>
