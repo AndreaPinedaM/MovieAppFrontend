@@ -80,6 +80,12 @@
 .search{
   justify-content: flex-end;
 }
+.delete{
+  color: #F2485F;
+}
+.delete:hover{
+  background-color: #303030;
+}
 
 /* ICONS */
 .fastar{
@@ -94,6 +100,9 @@
   color: rgb(74, 74, 141);
   margin: 10px;
 }
+.trash{
+  color: seagreen;
+}
 .icon{
   margin: 10px;
 }
@@ -107,6 +116,13 @@
   color: #04337D
 }
 /* CARDS */
+.card-header{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #303030;
+}
 .card-text{
   text-align: center;
   display: flex;
