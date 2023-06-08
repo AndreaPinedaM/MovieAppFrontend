@@ -10,7 +10,7 @@ const initialState = {
 }
 
 //crear una nueva pelicula
-export const createMovie = createAsyncThunk('tareas/create', async (movieData, thunkAPI) => {
+export const createMovie = createAsyncThunk('movies/create', async (movieData, thunkAPI) => {
     try {
         const token = thunkAPI.getState().auth.user.token
         return await movieService.createMovie(movieData, token)
@@ -21,7 +21,7 @@ export const createMovie = createAsyncThunk('tareas/create', async (movieData, t
 })
 
 //mostrar las peliculas del usuario
-export const getMovies = createAsyncThunk('tareas/getAll', async (_, thunkAPI) => {
+export const getMovies = createAsyncThunk('movies/getAll', async (_, thunkAPI) => {
     try {
         const token = thunkAPI.getState().auth.user.token
         return await movieService.getMovies(token)
@@ -32,7 +32,7 @@ export const getMovies = createAsyncThunk('tareas/getAll', async (_, thunkAPI) =
 })
 
 //borrar una pelicula
-export const deleteMovie = createAsyncThunk('tareas/borrar', async (id, thunkAPI) => {
+export const deleteMovie = createAsyncThunk('movies/delete', async (id, thunkAPI) => {
     try {
         const token = thunkAPI.getState().auth.user.token
         return await movieService.deleteMovie(id, token)
@@ -42,7 +42,7 @@ export const deleteMovie = createAsyncThunk('tareas/borrar', async (id, thunkAPI
     }
 })
 
-export const tareaSlice = createSlice({
+export const movieSlice = createSlice({
     name: 'movie',
     initialState,
     reducers: {
@@ -56,7 +56,7 @@ export const tareaSlice = createSlice({
             .addCase(createMovie.fulfilled, (state, action) => {
                 state.isLoading = false
                 state.isSuccess = true
-                state.tareas.push(action.payload)
+                state.movies.push(action.payload)
             })
             .addCase(createMovie.rejected, (state, action) => {
                 state.isLoading = false
@@ -69,7 +69,7 @@ export const tareaSlice = createSlice({
             .addCase(getMovies.fulfilled, (state, action) => {
                 state.isLoading = false
                 state.isSuccess = true
-                state.tareas = action.payload
+                state.movies = action.payload
             })
             .addCase(getMovies.rejected, (state, action) => {
                 state.isLoading = false
@@ -78,11 +78,11 @@ export const tareaSlice = createSlice({
             })
             .addCase(deleteMovie.pending, (state) => {
                 state.isLoading = true
-            }) 
+            })
             .addCase(deleteMovie.fulfilled, (state, action) => {
                 state.isLoading = false
                 state.isSuccess = true
-                state.tareas = state.tareas.filter((tarea) => tarea._id !== action.payload.id)
+                state.movies = state.movies.filter((movie) => movie._id !== action.payload.id)
             })
             .addCase(deleteMovie.rejected, (state, action) => {
                 state.isLoading = false
@@ -92,5 +92,5 @@ export const tareaSlice = createSlice({
     }
 })
 
-export const { reset } = tareaSlice.actions
-export default tareaSlice.reducer
+export const { reset } = movieSlice.actions
+export default movieSlice.reducer

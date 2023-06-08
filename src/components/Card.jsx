@@ -1,73 +1,72 @@
-import { FaThumbsUp, FaHeart, FaRegHeart, FaStar } from 'react-icons/fa'
+import { useState, useEffect } from 'react';
+import { FaThumbsUp, FaRegThumbsUp, FaHeart, FaRegHeart, FaStar } from 'react-icons/fa'
+import { deleteMovie, getMovies } from '../features/movies/movieSlice'
+import { useDispatch, useSelector } from 'react-redux'
 import DeleteIcon from '@mui/icons-material/Delete';
 import IconButton from '@mui/material/IconButton';
 import Tooltip from '@mui/material/Tooltip';
+import swal from 'sweetalert';
+import Button from 'react-bootstrap/Button';
+import Card from 'react-bootstrap/Card';
+import ListGroup from 'react-bootstrap/ListGroup';
+import Modal from 'react-bootstrap/Modal';
 
 
-const Card = () => {
+const Kard = ({ movie }) => {
+    const [show, setShow] = useState(false);
+
+    const handleClose = () => setShow(false);
+    const handleShow = () => setShow(true);
+    const dispatch = useDispatch()
+
     return (
         <>
-            <div>
-                <div className="card mb-3">
-                    <div className='card-header'>
-                        <h3>Card header</h3>
-                        <Tooltip title="Delete">
-                            <IconButton>
-                                <DeleteIcon className='delete' />
-                            </IconButton>
-                        </Tooltip>
-                    </div>
-                    <div className="card-body">
-                        <h5 className="card-title">Special title treatment</h5>
-                    </div>
-                    <svg xmlns="http://www.w3.org/2000/svg" className="d-block user-select-none" width="100%" height={200} aria-label="Placeholder: Image cap" focusable="false" role="img" preserveAspectRatio="xMidYMid slice" viewBox="0 0 318 180" style={{ fontSize: '1.125rem', textAnchor: 'middle' }}>
-                        <rect width="100%" height="100%" fill="#868e96" />
-                        <text x="50%" y="50%" fill="#dee2e6" dy=".3em">Image cap</text>
-                    </svg>
-                    <div className="card-body">
-                        <p className="card-text">
-                            <FaStar className='fastar'></FaStar>7.6
-                        </p>
-                    </div>
-                    <div className="card-body">
-                        <p className="card-text">
-                            <FaThumbsUp className='thumb'></FaThumbsUp> Likes
-                        </p>
-                    </div>
-                    <div className="description">
-                        <div>
-                            {/* Button trigger modal */}
-                            <button type="button" className="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
-                                Ver Sinopsis
-                            </button>
-                            {/* Modal */}
-                            <div className="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabIndex={-1} aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                                <div className="modal-dialog">
-                                    <div className="modal-content">
-                                        <div className="modal-header">
-                                            <h1 className="modal-title fs-5" id="staticBackdropLabel">Modal title</h1>
-                                            <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close" />
-                                        </div>
-                                        <div className="modal-body">
-                                            Sinopsis de la pelicula
-                                        </div>
-                                        <div className="modal-footer">
-                                            <button type="button" className="btn btn-info" data-bs-dismiss="modal">Close</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <FaRegHeart className='heart'></FaRegHeart>
-                    </div>
-                    <div className="card-footer text-muted">
-                        2 days ago
-                    </div>
-                </div>
-            </div>
-
+            <Card style={{ width: '18rem' }}>
+                <Card.Img variant="top" key={movie._id} src={movie.poster_path} />
+                <Card.Body>
+                    <Card.Title>
+                        {movie.original_title}
+                    </Card.Title>
+                </Card.Body>
+                <ListGroup className="list-group-flush">
+                    <ListGroup.Item>{movie.release_date}</ListGroup.Item>
+                    <ListGroup.Item><FaStar className='fastar icon'></FaStar>{movie.vote_average}</ListGroup.Item>
+                    <ListGroup.Item><FaRegThumbsUp className='thumb icon'></FaRegThumbsUp>{/* Likes */}{movie.vote_count}</ListGroup.Item>
+                    <ListGroup.Item></ListGroup.Item>
+                </ListGroup>
+                <Card.Body>
+                    <Button variant="primary" onClick={handleShow}>
+                        Sinopsis
+                    </Button>
+                    <FaRegHeart className='heart icon'></FaRegHeart>
+                    <Tooltip title="Delete">
+                        <IconButton onClick={() => {
+                            dispatch(deleteMovie(movie._id));
+                            window.location.reload(false);
+                            swal({
+                                title: "Good job!",
+                                text: "Película eliminada exitosamente!",
+                                icon: "success",
+                            });
+                        }}>
+                            <DeleteIcon className='delete' />
+                        </IconButton>
+                    </Tooltip>
+                    <Modal show={show} onHide={handleClose}>
+                        <Modal.Header closeButton>
+                            <Modal.Title>Sinopsis</Modal.Title>
+                        </Modal.Header>
+                        <Modal.Body>{movie.overview}</Modal.Body>
+                        <Modal.Footer>
+                            <Button variant="secondary" onClick={handleClose}>
+                                Close
+                            </Button>
+                        </Modal.Footer>
+                    </Modal>
+                </Card.Body>
+            </Card>
         </>
     )
 }
 
-export default Card
+export default Kard

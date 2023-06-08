@@ -9,24 +9,18 @@ const createMovie = async (movieData, token) => {
             Authorization: `Bearer ${token}`
         }
     }
-    // console.log()
     const response = await axios.post(API_URL, movieData, config)
-    // console.log(response.data);
     return response.data
 }
 
 //obtener las pelicula del usuario logeado
-const getMovies = async (token) => {
-    const config = {
-        headers: {
-            Authorization: `Bearer ${token}`
-        }
-    }
-    const response = await axios.get(API_URL, config)
+const getMovies = async () => {
+    const response = await axios.get(API_URL)
+    console.log(response.data);
     return response.data
 }
 
-//borramos una pelicula
+//borramos una pelicula 
 const deleteMovie = async (id, token) => {
     const config = {
         headers: {

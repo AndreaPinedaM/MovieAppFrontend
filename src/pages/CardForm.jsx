@@ -1,9 +1,11 @@
 import { useState, useEffect } from 'react'
-import { useNavigate } from "react-router-dom"
+import { useNavigate, NavLink } from "react-router-dom"
 import { useDispatch, useSelector } from 'react-redux'
 import { createMovie } from '../features/movies/movieSlice'
 import { toast } from 'react-toastify'
+import { FaHome } from 'react-icons/fa'
 import Spinner from "../components/Spinner"
+import swal from 'sweetalert';
 
 const CardForm = () => {
 
@@ -19,18 +21,19 @@ const CardForm = () => {
 
     const dispatch = useDispatch()
     const navigate = useNavigate()
+
     const user = JSON.parse(sessionStorage.getItem('user'))
     const { original_title, overview, poster_path, release_date, vote_average, vote_count } = data
-    // const { isLoading, isError, isSuccess, message } = useSelector((state) => state.movie)
+    const { isLoading, isError, isSuccess, message } = useSelector((state) => state.movie)
 
-    // useEffect(() => {
-    //     if (isError) {
-    //         toast.error(message)
-    //     }
-    //     if (isSuccess) {
-    //         navigate('/')
-    //     }
-    // }, [user, isError, isSuccess, message, navigate, dispatch])
+    useEffect(() => {
+        if (isError) {
+            toast.error(message)
+        }
+        if (isSuccess) {
+            toast.done('Película creada')
+        }
+    }, [user, isError, isSuccess, message, navigate, dispatch])
 
 
     useEffect(() => {
@@ -52,8 +55,12 @@ const CardForm = () => {
         if (!original_title || !overview || !poster_path || !release_date || !vote_average || !vote_count) {
             toast.error('Llena los campos requeridos')
         } else {
-            toast.done('Película añadida')
             dispatch(createMovie(data))
+            swal({
+                title: "Good job!",
+                text: "Película creada exitosamente!",
+                icon: "success",
+            });
             console.log(data)
             setData({
                 original_title: '',
@@ -66,13 +73,18 @@ const CardForm = () => {
         }
     }
 
-    // if (isLoading) {
-    //     return <Spinner></Spinner>
-    // }
+    if (isLoading) {
+        return <Spinner></Spinner>
+    }
 
     return (
         <div>
             <div className="Container cardform">
+                {/* <div className='header backBtn'>
+                    <NavLink to='/'>
+                        <button className="btn btn-lg btn-primary">Main Page <FaHome></FaHome></button>
+                    </NavLink>
+                </div> */}
                 <div className="glass-effect">
                     <h2>Card Form</h2>
                     <form onSubmit={onSubmit}>
