@@ -2,6 +2,7 @@ import { FaSignOutAlt } from 'react-icons/fa'
 import { useNavigate, NavLink } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 import { logout, reset } from '../features/auth/authSlice'
+import Account from './Account'
 
 const Navbar = () => {
 
@@ -38,12 +39,13 @@ const Navbar = () => {
                         <>
                             <div className="container-fluid collapse navbar-collapse search" id="navbarColor01">
                                 <form className="d-flex">
-                                    <input className="form-control me-sm-2" type="search" placeholder="Search" />
+                                    <input className="form-control me-sm-2 searchInput" type="search" placeholder="Search" />
                                     <button className="btn btn-dark my-2 my-sm-0" type="submit">Search</button>
                                 </form>
                                 <button className='btn btn-secondary' onClick={onLogout}>
                                     <FaSignOutAlt /> Logout
                                 </button>
+                                <Account />
                             </div>
                         </>
                     ) : (

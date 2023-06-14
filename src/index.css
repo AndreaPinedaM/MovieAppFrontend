@@ -1,9 +1,10 @@
-*{
+* {
   box-sizing: border-box;
   margin: 0%;
   padding: 0%;
 }
-.glass-effect{
+
+.glass-effect {
   background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0));
   -webkit-backdrop-filter: blur(18px);
   backdrop-filter: blur(18px);
@@ -17,7 +18,8 @@
   flex-direction: column;
   width: fit-content;
 }
-.Container{
+
+.Container {
   height: 100vh;
   width: 100%;
   display: flex;
@@ -25,29 +27,105 @@
   justify-content: center;
   align-items: center;
 }
-.inputContainer{
+
+.inputContainer {
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
 }
 
+.searchInput,
+.searchInput:focus {
+  background-color: #2525256f;
+  border-radius: 20px;
+  color: azure;
+}
+
+/* Acount Settings */
+#account {
+  width: 60px;
+}
+
+.edit {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin: 10px 0;
+}
+
+#editIcon {
+  cursor: pointer;
+}
+
+.offcanvas-body {
+  display: flex;
+  flex-direction: column;
+}
+
+#userImg {
+  background-image: url("./assets/user.png");
+  background-position: center;
+  background-size: contain;
+  width: 50px;
+  height: 50px;
+}
+
+#delete {
+  align-self: flex-end;
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+}
+
+/* Input editable */
+#changeUser {
+  margin: 10px 0;
+}
+
+.edit>input+span {
+  padding-right: 25px;
+}
+
+.edit>input:invalid+span:after {
+  position: absolute;
+  content: '❌';
+  padding-left: 5px;
+}
+
+.edit>input:valid+span:after {
+  position: absolute;
+  content: '✔️';
+  padding-left: 5px;
+}
+
+#changeUser>button {
+  background-color: #04337D;
+  padding: 5px;
+  border: none;
+  border-radius: 5px;
+}
+
+
 /* BACKGROUNDS */
-.dinamic{
+.dinamic {
   background-image: url("./assets/background.gif");
 }
-.signup{
+
+.signup {
   background-image: url("./assets/signup.gif");
 }
-.logBack{
+
+.logBack {
   background-image: url("./assets/login.gif");
 }
-.cardform{
+
+.cardform {
   background-image: url("./assets/cardform.gif");
 }
 
 /* LOGIN PAGE */
-.login{
+.login {
   margin-top: -15px;
   border-radius: 0 0 12px 12px;
   padding: 10px;
@@ -55,10 +133,13 @@
   padding: 10px 50px;
   text-align: center;
 }
-#email, #password{
+
+#email,
+#password {
   border-radius: 0;
 }
-#userIconContainer{
+
+#userIconContainer {
   width: 20%;
   height: 20%;
   margin-bottom: -75px;
@@ -66,69 +147,87 @@
 }
 
 /* BOTONES */
-.btn-secondary{
+.btn-secondary {
   margin: 10px;
 }
-.btn-primary{
+
+.btn-primary {
   margin: 10px 0px;
   width: 100%;
   background-color: #04337D;
 }
-.btn-danger{
+
+.btn-danger {
   background-color: #F2485F;
 }
-.search{
+
+.search {
   justify-content: flex-end;
 }
-.delete{
+
+.delete {
   color: #F2485F;
 }
-.delete:hover{
+
+.delete:hover {
   background-color: #303030;
 }
 
+/* .outline-offset:hover, 
+.outline-offset:focus{
+  outline-offset: 10px;
+} */
+
 /* ICONS */
-.fastar{
+.fastar {
   color: rgb(218, 218, 48);
 }
-.heart{
+
+.heart {
   color: rgb(232, 59, 136);
   font-size: 40px;
 }
-.thumb{
+
+.thumb {
   color: rgb(74, 74, 141);
 }
-.trash{
+
+.trash {
   color: seagreen;
 }
-.icon{
+
+.icon {
   margin: 15px;
 }
-.icon:hover{
+
+.icon:hover {
   cursor: pointer;
 }
-.loginIcon{
+
+.loginIcon {
   padding: 6.5px 10px;
   background-color: #04337D;
 }
-#userIcon{
+
+#userIcon {
   width: 100%;
   height: 100%;
   color: #04337D
 }
 
 /* CARDS */
-
-.card{
+.card {
   margin: 30px;
   font-size: 20px;
 }
-.card-body{
+
+.card-body {
   display: flex;
   justify-content: center;
   align-items: center;
 }
-.list-group-item{
+
+.list-group-item {
   display: flex;
   align-items: center;
 }
@@ -147,22 +246,6 @@
   background-repeat: no-repeat;
   z-index: 3;
 }
-.header{
-  display: flex;  
-  flex-direction: row;
-  justify-content: space-between ;
-  padding: 20px;
-}
-.backBtn{
-  background-color: transparent;
-}
-.Movies{
-  display: flex;
-  justify-content: center;
-  flex-direction: row;
-  flex-wrap: wrap;
-  width: 100%;
-}
 
 /* PAGINATION */
 .paginationSection {
@@ -171,5 +254,22 @@
   justify-content: center;
 }
 
-
 /* Home */
+.header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 20px;
+}
+
+.backBtn {
+  background-color: transparent;
+}
+
+.Movies {
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+  flex-wrap: wrap;
+  width: 100%;
+}

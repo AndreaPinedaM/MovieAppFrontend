@@ -1,4 +1,4 @@
-import { useNavigate, NavLink } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import { useState } from "react";
 // import { useEffect } from 'react'
 import { useSelector } from 'react-redux'
@@ -33,9 +33,6 @@ const Home = () => {
         <div className="homeContainer">
           <section className="header">
             <h4>Bienvenido {user && user.name}</h4>
-            <NavLink to='/newmovie'>
-              <button className="btn btn-primary">Agregar película</button>
-            </NavLink>
           </section>
           <section className="movies">
             <Cards
