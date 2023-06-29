@@ -1,7 +1,7 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { FaThumbsUp, FaRegThumbsUp, FaHeart, FaRegHeart, FaStar } from 'react-icons/fa'
-import { deleteMovie, getMovies } from '../features/movies/movieSlice'
-import { useDispatch, useSelector } from 'react-redux'
+import { deleteMovie, setFavMovies, removeFavMovie } from '../features/movies/movieSlice'
+import { useDispatch } from 'react-redux'
 import DeleteIcon from '@mui/icons-material/Delete';
 import IconButton from '@mui/material/IconButton';
 import Tooltip from '@mui/material/Tooltip';
@@ -11,13 +11,36 @@ import Card from 'react-bootstrap/Card';
 import ListGroup from 'react-bootstrap/ListGroup';
 import Modal from 'react-bootstrap/Modal';
 
-
 const Kard = ({ movie }) => {
     const [show, setShow] = useState(false);
+    const [likeHndl, setlikeHndl] = useState(false);
+    const [heartHndl, setHeartHndl] = useState(false);
 
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
+
     const dispatch = useDispatch()
+
+    const handleAddFavorite = (item) => {
+        dispatch(setFavMovies(item));
+        console.log("HAndleAdd", item)
+    };
+
+    const handleRemoveFavorite = (favoriteId) => {
+        dispatch(removeFavMovie(favoriteId));
+        console.log("HAndleRemove", favoriteId)
+    };
+
+
+    const handleLike = () => {
+        if (likeHndl) setlikeHndl(false)
+        else setlikeHndl(true);
+    }
+
+    const handleHeart = () => {
+        if (heartHndl) setHeartHndl(false)
+        else setHeartHndl(true);
+    }
 
     return (
         <>
@@ -31,14 +54,22 @@ const Kard = ({ movie }) => {
                 <ListGroup className="list-group-flush">
                     <ListGroup.Item>{movie.release_date}</ListGroup.Item>
                     <ListGroup.Item><FaStar className='fastar icon'></FaStar>{movie.vote_average}</ListGroup.Item>
-                    <ListGroup.Item><FaRegThumbsUp className='thumb icon'></FaRegThumbsUp>{/* Likes */}{movie.vote_count}</ListGroup.Item>
+                    <ListGroup.Item>{
+                        likeHndl ?
+                            <FaThumbsUp className='thumb icon' onClick={handleLike} /> :
+                            <FaRegThumbsUp className='thumb icon' onClick={handleLike} />
+                    }{/* Likes */}{movie.vote_count}</ListGroup.Item>
                     <ListGroup.Item></ListGroup.Item>
                 </ListGroup>
                 <Card.Body>
                     <Button variant="primary" onClick={handleShow}>
                         Sinopsis
                     </Button>
-                    <FaRegHeart className='heart icon'></FaRegHeart>
+                    {
+                        heartHndl ?
+                            <FaHeart className='heart icon' onClick={() => { handleHeart(); handleRemoveFavorite(movie._id) }} /> :
+                            <FaRegHeart className='heart icon' onClick={() => { handleHeart(); handleAddFavorite(movie._id) }} />
+                    }
                     <Tooltip title="Delete">
                         <IconButton onClick={() => {
                             dispatch(deleteMovie(movie._id));

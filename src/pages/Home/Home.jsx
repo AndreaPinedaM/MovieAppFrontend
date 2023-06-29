@@ -2,8 +2,10 @@ import { useNavigate } from 'react-router-dom'
 import { useState } from "react";
 // import { useEffect } from 'react'
 import { useSelector } from 'react-redux'
-// import Spinner from '../../components/Spinner'
+import { FaSortAlphaDown } from 'react-icons/fa'
+import Button from 'react-bootstrap/Button';
 import Cards from '../../components/Cards'
+// import Spinner from '../../components/Spinner'
 // import Categories from '../../components/Categories'
 import Pagination from '../../components/Pagination';
 
@@ -27,12 +29,17 @@ const Home = () => {
     setCurrentPage(page);
   };
   // End of pagination
+
   return (
     <>
       {user ? (
         <div className="homeContainer">
           <section className="header">
             <h4>Bienvenido {user && user.name}</h4>
+            <div id="filters">
+              <Button variant="primary" ><FaSortAlphaDown></FaSortAlphaDown></Button>
+              {/* <Categories></Categories> */}
+            </div>
           </section>
           <section className="movies">
             <Cards

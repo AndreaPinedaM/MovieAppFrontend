@@ -4,6 +4,13 @@
   padding: 0%;
 }
 
+a {
+  text-decoration: none;
+  color: aliceblue;
+}
+
+
+/* FORMS */
 .glass-effect {
   background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0));
   -webkit-backdrop-filter: blur(18px);
@@ -28,6 +35,16 @@
   align-items: center;
 }
 
+/* Navbar */
+.logo {
+  margin: 10px;
+}
+
+.navbar-nav {
+  display: flex;
+  align-items: center;
+}
+
 .inputContainer {
   display: flex;
   flex-direction: row;
@@ -47,11 +64,24 @@
   width: 60px;
 }
 
+.tittleContainer {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+
+.sidebarIcon {
+  margin: 0 10px 0 0;
+}
+
 .edit {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  align-items: center;
   margin: 10px 0;
+  cursor: pointer;
 }
 
 #editIcon {
@@ -63,6 +93,14 @@
   flex-direction: column;
 }
 
+.editButton {
+  background-color: transparent !important;
+  border: none;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
 #userImg {
   background-image: url("./assets/user.png");
   background-position: center;
@@ -71,41 +109,21 @@
   height: 50px;
 }
 
-#delete {
-  align-self: flex-end;
-  position: absolute;
-  bottom: 10px;
-  right: 10px;
-}
-
 /* Input editable */
-#changeUser {
-  margin: 10px 0;
-}
-
-.edit>input+span {
-  padding-right: 25px;
-}
-
 .edit>input:invalid+span:after {
-  position: absolute;
+  position: relative;
   content: '❌';
-  padding-left: 5px;
 }
 
 .edit>input:valid+span:after {
-  position: absolute;
+  position: relative;
   content: '✔️';
-  padding-left: 5px;
 }
 
-#changeUser>button {
-  background-color: #04337D;
-  padding: 5px;
-  border: none;
-  border-radius: 5px;
+.modal-footer {
+  display: flex;
+  flex-direction: row;
 }
-
 
 /* BACKGROUNDS */
 .dinamic {
@@ -155,6 +173,13 @@
   margin: 10px 0px;
   width: 100%;
   background-color: #04337D;
+}
+
+.smallPrimary {
+  background-color: #04337D;
+  padding: 7px;
+  border: none;
+  border-radius: 5px;
 }
 
 .btn-danger {
@@ -254,12 +279,21 @@
   justify-content: center;
 }
 
-/* Home */
+/* HOME */
 .header {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   padding: 20px;
+}
+
+#filters {
+  display: flex;
+  flex-direction: row;
+}
+
+#filters>button {
+  margin: 10px;
 }
 
 .backBtn {
@@ -272,4 +306,32 @@
   flex-direction: row;
   flex-wrap: wrap;
   width: 100%;
+}
+
+.cardsContainer {
+  text-align: center;
+}
+
+/* USER DATA  */
+.userData {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  margin: 20px;
+}
+
+.userData>h2,
+h3,
+h4,
+h5 {
+  margin: 15px;
+}
+
+#dangerZone {
+  position: fixed;
+  bottom: 20px;
+}
+
+#delete {
+  align-self: flex-start;
 }

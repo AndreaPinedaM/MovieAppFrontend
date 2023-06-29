@@ -21,18 +21,23 @@ const Navbar = () => {
         <nav className="navbar navbar-expand-lg navbar-dark bg-primary">
             <div className="container-fluid">
                 <NavLink to='/'>
-                    <p className="navbar-brand">Oura Movies</p>
+                    <img
+                        alt="Logo"
+                        src="../../src/assets/logo.png"
+                        width="40"
+                        height="40"
+                        id="logo"
+                        className="d-inline-block align-top"
+                    />{' '}
                 </NavLink>
                 <button className="navbar-toggler collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
                     <span className="navbar-toggler-icon" />
                 </button>
                 <div className="navbar-collapse collapse" id="navbarColor01" style={{}}>
                     <ul className="navbar-nav me-auto">
+                        <li className="nav-item logo">Oura Movies</li>
                         <li className="nav-item">
                             <a className="nav-link" href="#" onClick={() => navigate('/')}>Home</a>
-                        </li>
-                        <li className="nav-item">
-                            <a className="nav-link" href="#">About</a>
                         </li>
                     </ul>
                     {user ? (

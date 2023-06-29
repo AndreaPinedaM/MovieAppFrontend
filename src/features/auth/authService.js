@@ -19,17 +19,20 @@ const login = async (userData) => {
     return response.data
 }
 
-//Actualizar usuario 
-const update = async (token) => {
+//UPDATE user
+const update = async (userName, token) => {
     const user = JSON.parse(sessionStorage.getItem("user"));
     const id = user._id
-    console.log(id);
     const config = {
         headers: {
             Authorization: `Bearer ${token}`
         }
     }
-    const response = await axios.put(API_URL + id, config)
+    const response = await axios.put(API_URL + id, userName, config)
+    console.log(response?.data)
+    sessionStorage.setItem('user', JSON.stringify({
+        ...user, name: response.data.name
+    }))
     return response.data
 }
 
@@ -41,7 +44,8 @@ const getMyData = async (token) => {
         }
     }
     const response = await axios.get(API_URL + 'mydata', config)
-    return response.data
+    console.log(response.data.favMovies)
+    return response.data.favMovies
 }
 
 //LOGOUT

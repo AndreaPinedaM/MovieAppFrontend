@@ -12,6 +12,7 @@ const Cards = ({ pageNumber, pageSize }) => {
     const dispatch = useDispatch()
 
     const user = JSON.parse(sessionStorage.getItem('user'))
+
     const { movies, isError, isLoading, isSuccess, message } = useSelector((state) => state.movie || {})
 
     const paginatedPosts = paginate(movies, pageNumber, pageSize);

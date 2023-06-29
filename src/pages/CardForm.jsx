@@ -1,9 +1,8 @@
 import { useState, useEffect } from 'react'
-import { useNavigate, NavLink } from "react-router-dom"
+import { useNavigate } from "react-router-dom"
 import { useDispatch, useSelector } from 'react-redux'
 import { createMovie } from '../features/movies/movieSlice'
 import { toast } from 'react-toastify'
-import { FaHome } from 'react-icons/fa'
 import Spinner from "../components/Spinner"
 import swal from 'sweetalert';
 
@@ -18,12 +17,13 @@ const CardForm = () => {
         vote_count: ''
     })
 
-
     const dispatch = useDispatch()
     const navigate = useNavigate()
 
     const user = JSON.parse(sessionStorage.getItem('user'))
+
     const { original_title, overview, poster_path, release_date, vote_average, vote_count } = data
+
     const { isLoading, isError, isSuccess, message } = useSelector((state) => state.movie)
 
     useEffect(() => {

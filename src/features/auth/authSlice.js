@@ -6,6 +6,7 @@ const user = JSON.parse(sessionStorage.getItem('user'))
 
 const initialState = {
     user: user ? user : null,
+    favMovies: [],
     isError: false,
     isSuccess: false,
     isLoading: false,
@@ -35,7 +36,19 @@ export const login = createAsyncThunk('auth/login', async (user, thunkAPI) => {
 //UPDATE USER
 export const update = createAsyncThunk('auth/update', async (user, thunkAPI) => {
     try {
-        return await authService.update(user)
+        const token = thunkAPI.getState().auth.user.token
+        return await authService.update(user, token)
+    } catch (error) {
+        const message = (error.response && error.response.data && error.response.data.message) || error.message || error.toString()
+        return thunkAPI.rejectWithValue(message)
+    }
+})
+
+//GET DATA
+export const getData = createAsyncThunk('auth/data', async (user, thunkAPI) => {
+    try {
+        const token = thunkAPI.getState().auth.user.token
+        return await authService.getMyData(token, user)
     } catch (error) {
         const message = (error.response && error.response.data && error.response.data.message) || error.message || error.toString()
         return thunkAPI.rejectWithValue(message)
@@ -57,6 +70,7 @@ export const authSlice = createSlice({
             state.isError = false
             state.isSuccess = false
             state.message = ''
+            state.favMovies = []
         }
     },
     extraReducers: (builder) => {
@@ -75,6 +89,7 @@ export const authSlice = createSlice({
                 state.message = action.payload //thunkAPI.rejectedWithValue(message) desde el estado
                 state.user = null
             })
+
             .addCase(login.pending, (state) => {
                 state.isLoading = true
             })
@@ -89,6 +104,36 @@ export const authSlice = createSlice({
                 state.message = action.payload
                 state.user = null
             })
+
+            .addCase(update.pending, (state) => {
+                state.isLoading = true
+            })
+            .addCase(update.fulfilled, (state, action) => {
+                state.isLoading = false
+                state.isSuccess = true
+                state.message = action.payload
+            })
+            .addCase(update.rejected, (state, action) => {
+                state.isLoading = false
+                state.isError = true
+                state.message = action.payload
+            })
+
+            .addCase(getData.pending, (state) => {
+                state.isLoading = true
+            })
+            .addCase(getData.fulfilled, (state, action) => {
+                state.isLoading = false
+                state.isSuccess = true
+                state.favMovies = action.payload
+                state.message = action.payload
+            })
+            .addCase(getData.rejected, (state, action) => {
+                state.isLoading = false
+                state.isError = true
+                state.message = action.payload
+            })
+
             .addCase(logout.fulfilled, (state) => {
                 state.user = null
             })

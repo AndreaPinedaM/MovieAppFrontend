@@ -1,23 +1,23 @@
 import { useSelector } from "react-redux";
+import Dropdown from 'react-bootstrap/Dropdown';
+import DropdownButton from 'react-bootstrap/DropdownButton';
 
 const Categories = () => {
     const { movies } = useSelector((state) => state.movie);
 
     const categories = [];
     movies.map(movie => categories.push(movie.vote_average))
-    const categoriesFinal = ["All Categories", ...new Set(categories)]
+    const categoriesFinal = ["All Movies", ...new Set(categories)]
 
     return (
-        <ul className="list-group">
+        <DropdownButton id="dropdown-basic-button" className="list-group" title="Vote average">
             {categoriesFinal.map((category) => (
-                <li
+                <Dropdown.Item
                     key={category}
                     className="list-group-item"
-                >
-                    {category}
-                </li>
+                >{category}</Dropdown.Item>
             ))}
-        </ul>
+        </DropdownButton>
     );
 };
 export default Categories;
